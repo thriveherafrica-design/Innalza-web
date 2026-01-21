@@ -409,12 +409,14 @@
               </div>
             </div>
 
-            <!-- ✅ Cloudflare Pages-ready contact form (sends without leaving page) -->
-            <form class="contact-form" id="contactForm" novalidate>
-              <!-- Honeypot (basic spam trap) -->
-              <p style="display:none;">
-                <label>Don’t fill this out: <input name="bot-field" id="botField" /></label>
-              </p>
+            <!-- ✅ Formspree contact form (no JS, no worker) -->
+            <form
+              class="contact-form"
+              action="https://formspree.io/f/xzddwkrb"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="New message from Innalza Negocio website" />
+              <input type="hidden" name="_captcha" value="false" />
 
               <div class="field">
                 <label for="name">Name</label>
@@ -451,7 +453,6 @@
               </div>
 
               <button class="btn btn--primary" type="submit">Send message</button>
-              <p class="form__note" id="contactNote" role="status" aria-live="polite"></p>
             </form>
           </div>
         </div>
@@ -582,49 +583,11 @@
 
     <script src="./script.js"></script>
 
-    <!-- ✅ Small inline helper: year + Cloudflare Pages form submit without leaving page -->
+    <!-- ✅ Year only (Formspree handles contact) -->
     <script>
       (function () {
-        // year
         var y = document.getElementById("year");
         if (y) y.textContent = new Date().getFullYear();
-
-        // Cloudflare Pages Function submission
-        var form = document.getElementById("contactForm");
-        var note = document.getElementById("contactNote");
-        if (!form) return;
-
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          if (note) note.textContent = "Sending...";
-
-          var payload = {
-            name: (document.getElementById("name") || {}).value || "",
-            company: (document.getElementById("company") || {}).value || "",
-            email: (document.getElementById("email2") || {}).value || "",
-            message: (document.getElementById("message") || {}).value || "",
-            botField: (document.getElementById("botField") || {}).value || ""
-          };
-
-          fetch("https://snowy-wave-2289.nyangatemoongoko.workers.dev", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          })
-            .then(function (res) {
-              if (!res.ok) throw new Error("Request failed");
-              return res.json().catch(function () {
-                return {};
-              });
-            })
-            .then(function () {
-              if (note) note.textContent = "Message sent. We’ll reply within 24–48 hours.";
-              form.reset();
-            })
-            .catch(function () {
-              if (note) note.textContent = "Something went wrong. Please try again.";
-            });
-        });
       })();
     </script>
   </body>
