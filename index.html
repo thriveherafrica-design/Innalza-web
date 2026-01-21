@@ -1,5 +1,14 @@
-<!-- Innalza Negocio – Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Innalza Negocio – Favicon (MUST be inside <head>) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
   <rect width='100' height='100' rx='18' fill='%230b1220'/>
   <text x='50' y='68'
@@ -7,15 +16,10 @@
         font-size='64'
         font-family='Arial, Helvetica, sans-serif'
         font-weight='700'
-        fill='%23f5f7ff'>
-    N
-  </text>
-</svg>">
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+        fill='%23f5f7ff'>N</text>
+</svg>"
+    />
+
     <title>Innalza Negocio — Structured Growth, Built Right</title>
     <meta
       name="description"
@@ -93,7 +97,6 @@
               We help businesses build <span class="accent">brands that last</span>.
             </h1>
 
-            <!-- ✅ UPDATED (Option A) -->
             <p class="hero__lead">
               Innalza is an Italian word meaning <em>elevate</em>. Negocio is a Latin word meaning
               <em>business</em>.
@@ -365,6 +368,7 @@
                 operational excellence.
               </p>
 
+              <!-- Newsletter form: still frontend-only until you connect MailerLite/ConvertKit -->
               <form class="form" id="newsletterForm" novalidate>
                 <label class="sr-only" for="email">Email</label>
                 <input
@@ -406,15 +410,47 @@
               </div>
             </div>
 
-            <form class="contact-form" id="contactForm" novalidate>
+            <!-- Contact form: upgraded to Formspree (reliable email delivery on static sites) -->
+            <form
+              class="contact-form"
+              id="contactForm"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST"
+              novalidate
+            >
+              <!-- Spam honeypot: bots fill this, humans won't -->
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+              <!-- Optional subject -->
+              <input type="hidden" name="_subject" value="New website inquiry — Innalza Negocio" />
+
+              <!-- Optional redirect (create /thanks.html if you use this) -->
+              <!-- <input type="hidden" name="_redirect" value="https://innalzanegocio.com/thanks.html" /> -->
+
               <div class="field">
                 <label for="name">Name</label>
                 <input class="input" id="name" name="name" placeholder="Your name" required />
               </div>
+
               <div class="field">
                 <label for="company">Company</label>
                 <input class="input" id="company" name="company" placeholder="Company name" required />
               </div>
+
+              <!-- Added: email field so you can reply -->
+              <div class="field">
+                <label for="email2">Email</label>
+                <input
+                  class="input"
+                  id="email2"
+                  name="email"
+                  type="email"
+                  placeholder="Your email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+
               <div class="field">
                 <label for="message">What do you need help with?</label>
                 <textarea
@@ -449,6 +485,35 @@
           <a class="footer__link" href="#services">Services</a>
           <a class="footer__link" href="#approach">Approach</a>
           <a class="footer__link" href="#contact">Contact</a>
+
+          <!-- Social links (added) -->
+          <div class="footer__socials">
+            <a
+              class="footer__link"
+              href="https://www.instagram.com/innalzanegocio/"
+              target="_blank"
+              rel="noopener"
+              aria-label="Innalza Negocio on Instagram"
+              >Instagram</a
+            >
+            <a
+              class="footer__link"
+              href="https://www.youtube.com/@innalzanegocio"
+              target="_blank"
+              rel="noopener"
+              aria-label="Innalza Negocio on YouTube"
+              >YouTube</a
+            >
+            <a
+              class="footer__link"
+              href="https://www.tiktok.com/@innalzanegocio"
+              target="_blank"
+              rel="noopener"
+              aria-label="Innalza Negocio on TikTok"
+              >TikTok</a
+            >
+          </div>
+
           <span class="footer__copy">© <span id="year"></span> Innalza. All rights reserved.</span>
         </div>
       </div>
