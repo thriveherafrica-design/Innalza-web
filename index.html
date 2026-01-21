@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Innalza Negocio – Favicon (MUST be inside <head>) -->
+    <!-- Innalza Negocio – Favicon -->
     <link
       rel="icon"
       type="image/svg+xml"
@@ -40,6 +40,31 @@
     />
 
     <link rel="stylesheet" href="./styles.css" />
+
+    <!-- Inline CSS for Social Icons (optional; move to styles.css if you prefer) -->
+    <style>
+      .footer__socials {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.75rem;
+      }
+      .social-icon {
+        display: inline-flex;
+        width: 20px;
+        height: 20px;
+        color: var(--muted);
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+      .social-icon svg {
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
+      }
+      .social-icon:hover {
+        color: var(--text);
+        transform: translateY(-1px);
+      }
+    </style>
   </head>
 
   <body>
@@ -410,7 +435,7 @@
               </div>
             </div>
 
-            <!-- Contact form: upgraded to Formspree (reliable email delivery on static sites) -->
+            <!-- Contact form: upgraded to Formspree (replace YOUR_FORM_ID) -->
             <form
               class="contact-form"
               id="contactForm"
@@ -420,12 +445,8 @@
             >
               <!-- Spam honeypot: bots fill this, humans won't -->
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-
-              <!-- Optional subject -->
+              <!-- Subject -->
               <input type="hidden" name="_subject" value="New website inquiry — Innalza Negocio" />
-
-              <!-- Optional redirect (create /thanks.html if you use this) -->
-              <!-- <input type="hidden" name="_redirect" value="https://innalzanegocio.com/thanks.html" /> -->
 
               <div class="field">
                 <label for="name">Name</label>
@@ -437,7 +458,6 @@
                 <input class="input" id="company" name="company" placeholder="Company name" required />
               </div>
 
-              <!-- Added: email field so you can reply -->
               <div class="field">
                 <label for="email2">Email</label>
                 <input
@@ -486,32 +506,49 @@
           <a class="footer__link" href="#approach">Approach</a>
           <a class="footer__link" href="#contact">Contact</a>
 
-          <!-- Social links (added) -->
-          <div class="footer__socials">
+          <!-- Social icons -->
+          <div class="footer__socials" aria-label="Social media links">
             <a
-              class="footer__link"
               href="https://www.instagram.com/innalzanegocio/"
               target="_blank"
               rel="noopener"
               aria-label="Innalza Negocio on Instagram"
-              >Instagram</a
+              class="social-icon"
             >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5.5A4.5 4.5 0 1016.5 12 4.5 4.5 0 0012 7.5zm6.25-.75a1.25 1.25 0 11-1.25-1.25 1.25 1.25 0 011.25 1.25z"
+                />
+              </svg>
+            </a>
+
             <a
-              class="footer__link"
               href="https://www.youtube.com/@innalzanegocio"
               target="_blank"
               rel="noopener"
               aria-label="Innalza Negocio on YouTube"
-              >YouTube</a
+              class="social-icon"
             >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6a3 3 0 00-2.1 2.1A31.7 31.7 0 000 12a31.7 31.7 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.7 31.7 0 0024 12a31.7 31.7 0 00-.5-5.8zM9.6 15.5v-7l6.2 3.5z"
+                />
+              </svg>
+            </a>
+
             <a
-              class="footer__link"
               href="https://www.tiktok.com/@innalzanegocio"
               target="_blank"
               rel="noopener"
               aria-label="Innalza Negocio on TikTok"
-              >TikTok</a
+              class="social-icon"
             >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M21 8.5a6.5 6.5 0 01-4-1.4v7.3a6.5 6.5 0 11-6.5-6.5 6.3 6.3 0 011.5.2v3.1a3.5 3.5 0 10 2 3.2V2h3a6.5 6.5 0 004 4z"
+                />
+              </svg>
+            </a>
           </div>
 
           <span class="footer__copy">© <span id="year"></span> Innalza. All rights reserved.</span>
