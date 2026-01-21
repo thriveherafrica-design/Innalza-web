@@ -540,13 +540,6 @@ strong { font-weight: 800; }
   color: #FFFFFF;
 }
 
-/* ✅ hard reset only inside footer to prevent giant icons from global svg/img rules */
-.footer svg,
-.footer img {
-  max-width: 100%;
-  height: auto;
-}
-
 .footer__inner {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -579,8 +572,8 @@ strong { font-weight: 800; }
 .footer__link {
   font-size: 13px;
   color: rgba(255,255,255,0.86);
-  padding: 6px 10px;              /* a little padding helps hover look better */
-  border-radius: 10px;
+  padding: 6px 0;
+  border-radius: 8px;
   transition: background 0.15s ease, color 0.15s ease;
 }
 .footer__link:hover {
@@ -594,58 +587,21 @@ strong { font-weight: 800; }
   margin-top: 8px;
 }
 
-/* ✅ social row */
 .social-link {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-weight: 650;
   font-size: 13px;
-  line-height: 1.2;
   color: rgba(255,255,255,0.92);
-  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
-  padding: 6px 10px;
-  border-radius: 12px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.social-link:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
-  background: rgba(255,255,255,0.06);
-}
+.social-link:hover { opacity: 0.85; transform: translateY(-1px); }
 
-/* ✅ FORCE icon size (this is the key fix) */
-.footer .social-link svg {
-  width: 18px !important;
-  height: 18px !important;
-  min-width: 18px;
-  min-height: 18px;
-  flex: 0 0 18px;
-  display: block;
-  fill: currentColor;
-}
-
-/* If you used <img> icons instead of SVG, this protects you too */
-.footer .social-link img {
-  width: 18px !important;
-  height: 18px !important;
-  min-width: 18px;
-  min-height: 18px;
-  flex: 0 0 18px;
-  display: block;
-  object-fit: contain;
-}
-
-/* Icon colors */
-.social-link.instagram { color: rgba(255,255,255,0.92); }
+/* Icon colors (visible on dark footer) */
 .social-link.instagram svg { color: #E1306C; }
-
-.social-link.youtube { color: rgba(255,255,255,0.92); }
 .social-link.youtube svg { color: #FF0000; }
-
-.social-link.whatsapp { color: rgba(255,255,255,0.92); }
 .social-link.whatsapp svg { color: #25D366; }
-
-.social-link.tiktok { color: rgba(255,255,255,0.92); }
 .social-link.tiktok svg { color: #25F4EE; }
 .social-link.tiktok:hover svg { color: #FE2C55; }
 
@@ -687,4 +643,67 @@ strong { font-weight: 800; }
   }
   .footer__right { gap: 12px; }
   .footer__copy { margin-top: 12px; }
+}
+
+/* =========================================================
+   ✅ ULTRA-HARD FOOTER SOCIAL ICON CLAMP (BACK TO SMALL)
+   This block MUST stay at the very bottom of the CSS.
+   It overrides global svg rules and icon libraries.
+   ========================================================= */
+
+/* clamp any scaling coming from font-size inheritance */
+.footer .footer__socials,
+.footer .footer__socials * {
+  font-size: 13px !important;
+}
+
+/* target ALL common icon types inside footer socials */
+.footer .footer__socials svg,
+.footer .footer__socials img,
+.footer .footer__socials i,
+.footer .footer__socials span,
+.footer .footer__socials [class*="icon"],
+.footer .footer__socials [class^="icon"] {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  line-height: 16px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  transform: none !important;
+}
+
+/* if the svg is inside the social-link (your case) */
+.footer .social-link svg,
+.footer .social-link img,
+.footer .social-link i {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  flex: 0 0 16px !important;
+  display: block !important;
+  transform: none !important;
+}
+
+/* most brutal fallback: if a global `svg{}` rule is nuking everything */
+.footer svg {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  transform: none !important;
+}
+
+/* keep rows aligned nicely */
+.footer .footer__socials a,
+.footer .footer__socials .social-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
 }
