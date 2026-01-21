@@ -537,7 +537,14 @@ strong { font-weight: 800; }
   padding: 48px 0 40px;
   margin-top: 80px;
   backdrop-filter: blur(10px);
-  color: #FFFFFF; /* footer words white */
+  color: #FFFFFF;
+}
+
+/* ✅ hard reset only inside footer to prevent giant icons from global svg/img rules */
+.footer svg,
+.footer img {
+  max-width: 100%;
+  height: auto;
 }
 
 .footer__inner {
@@ -572,8 +579,8 @@ strong { font-weight: 800; }
 .footer__link {
   font-size: 13px;
   color: rgba(255,255,255,0.86);
-  padding: 6px 0;
-  border-radius: 8px;
+  padding: 6px 10px;              /* a little padding helps hover look better */
+  border-radius: 10px;
   transition: background 0.15s ease, color 0.15s ease;
 }
 .footer__link:hover {
@@ -587,28 +594,58 @@ strong { font-weight: 800; }
   margin-top: 8px;
 }
 
+/* ✅ social row */
 .social-link {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-weight: 650;
   font-size: 13px;
+  line-height: 1.2;
   color: rgba(255,255,255,0.92);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  padding: 6px 10px;
+  border-radius: 12px;
 }
-.social-link svg {
-  width: 18px;
-  height: 18px;
+.social-link:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.06);
+}
+
+/* ✅ FORCE icon size (this is the key fix) */
+.footer .social-link svg {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px;
+  min-height: 18px;
+  flex: 0 0 18px;
+  display: block;
   fill: currentColor;
 }
-.social-link:hover { opacity: 0.85; transform: translateY(-1px); }
 
-/* Icon colors (visible on dark footer) */
+/* If you used <img> icons instead of SVG, this protects you too */
+.footer .social-link img {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px;
+  min-height: 18px;
+  flex: 0 0 18px;
+  display: block;
+  object-fit: contain;
+}
+
+/* Icon colors */
+.social-link.instagram { color: rgba(255,255,255,0.92); }
 .social-link.instagram svg { color: #E1306C; }
+
+.social-link.youtube { color: rgba(255,255,255,0.92); }
 .social-link.youtube svg { color: #FF0000; }
+
+.social-link.whatsapp { color: rgba(255,255,255,0.92); }
 .social-link.whatsapp svg { color: #25D366; }
 
-/* TikTok black disappears on dark — use brand accent colors */
+.social-link.tiktok { color: rgba(255,255,255,0.92); }
 .social-link.tiktok svg { color: #25F4EE; }
 .social-link.tiktok:hover svg { color: #FE2C55; }
 
