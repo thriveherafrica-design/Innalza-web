@@ -530,14 +530,14 @@ strong { font-weight: 800; }
 .contact-form { display: grid; gap: 12px; }
 .field label { display: block; margin: 0 0 7px; font-size: 13px; color: var(--muted); }
 
-/* FOOTER — polished spacing + layout */
+/* Footer polish + visible tagline + visible socials */
 .footer {
   border-top: 1px solid rgba(255,255,255,0.12);
   background: rgba(31,41,55,0.92);
   padding: 48px 0 40px;
   margin-top: 80px;
   backdrop-filter: blur(10px);
-  color: rgba(255,255,255,0.86);
+  color: rgba(255,255,255,0.92); /* make footer text more readable */
 }
 
 .footer__inner {
@@ -547,9 +547,14 @@ strong { font-weight: 800; }
   align-items: flex-start;
 }
 
-.footer__left {
-  display: grid;
-  gap: 12px;
+.footer__left { display: grid; gap: 12px; }
+
+.footer__tagline {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.78); /* ensure visible */
+  max-width: 360px;
 }
 
 .footer__right {
@@ -569,80 +574,60 @@ strong { font-weight: 800; }
   color: rgba(255,255,255,0.78);
   padding: 6px 0;
   border-radius: 8px;
-  transition: color 0.15s ease, background 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 .footer__link:hover {
-  color: rgba(255,255,255,0.94);
   background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.95);
 }
 
-/* Social links with names + real colors */
 .footer__socials {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   margin-top: 8px;
 }
 
+/* Social links: always visible (brand colors handled per platform) */
 .social-link {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-weight: 650;
   font-size: 13px;
+  color: rgba(255,255,255,0.86); /* default readable */
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
+
 .social-link svg {
   width: 18px;
   height: 18px;
   fill: currentColor;
 }
+
 .social-link:hover {
   opacity: 0.85;
   transform: translateY(-1px);
 }
 
-/* Platform colors */
-.social-link.instagram { color: #E1306C; }
-.social-link.youtube { color: #FF0000; }
-.social-link.tiktok { color: #000000; }
-.social-link.whatsapp { color: #25D366; }
+/* Brand icon colors (applied to SVG via currentColor) */
+.social-link.instagram svg { color: #E1306C; }
+.social-link.youtube svg { color: #FF0000; }
+.social-link.whatsapp svg { color: #25D366; }
 
-/* Keep the text readable on dark footer for TikTok (black) */
-.social-link.tiktok span { color: rgba(255,255,255,0.86); }
-.social-link.tiktok svg { color: #000000; }
+/* TikTok: black would disappear on dark footer -> use TikTok teal/pink blend */
+.social-link.tiktok svg { color: #25F4EE; } /* readable TikTok brand accent */
+.social-link.tiktok:hover svg { color: #FE2C55; }
 
-/* Copyright */
+/* Keep names readable */
+.social-link span { color: rgba(255,255,255,0.86); }
+
 .footer__copy {
   margin-top: 18px;
   font-size: 12px;
   color: rgba(255,255,255,0.70);
 }
 
-/* Reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 500ms ease, transform 500ms ease;
-}
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-/* Responsive */
 @media (max-width: 980px) {
-  .hero__grid { grid-template-columns: 1fr; }
-  .trust { grid-template-columns: 1fr; }
-  .grid--3 { grid-template-columns: 1fr; }
-  .grid--2 { grid-template-columns: 1fr; }
-  .split { grid-template-columns: 1fr; }
-  .cta { grid-template-columns: 1fr; }
-  .form { grid-template-columns: 1fr; }
-  .contact { grid-template-columns: 1fr; }
-  .nav { display: none; }
-  .menu-btn { display: inline-block; }
-
-  .section { padding: 64px 0; }
-  .section--cta { padding: 72px 0; }
-  .hero { padding: 64px 0 28px; }
-
   .footer__inner {
     grid-template-columns: 1fr;
     gap: 32px;
