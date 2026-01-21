@@ -606,14 +606,16 @@
             botField: (document.getElementById("botField") || {}).value || ""
           };
 
-fetch("snowy-wave-2289.nyangatemoongoko.workers.dev, {
+          fetch("https://snowy-wave-2289.nyangatemoongoko.workers.dev", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           })
             .then(function (res) {
               if (!res.ok) throw new Error("Request failed");
-              return res.json().catch(function () { return {}; });
+              return res.json().catch(function () {
+                return {};
+              });
             })
             .then(function () {
               if (note) note.textContent = "Message sent. We’ll reply within 24–48 hours.";
