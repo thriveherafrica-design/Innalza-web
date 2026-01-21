@@ -409,8 +409,22 @@
               </div>
             </div>
 
-            <!-- ✅ Cloudflare-friendly contact form (opens email composer with details) -->
-            <form class="contact-form" id="contactForm" novalidate>
+            <!-- ✅ Contact form: submits WITHOUT leaving the page (Netlify-ready) -->
+            <form
+              class="contact-form"
+              id="contactForm"
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              novalidate
+            >
+              <!-- Netlify required hidden fields -->
+              <input type="hidden" name="form-name" value="contact" />
+              <p style="display:none;">
+                <label>Don’t fill this out: <input name="bot-field" /></label>
+              </p>
+
               <div class="field">
                 <label for="name">Name</label>
                 <input class="input" id="name" name="name" placeholder="Your name" required />
@@ -446,10 +460,7 @@
               </div>
 
               <button class="btn btn--primary" type="submit">Send message</button>
-              <p class="form__note" role="status" aria-live="polite">
-                This will open your email app and send to
-                <strong>innalzanegocio@innalzanegocio.com</strong>.
-              </p>
+              <p class="form__note" id="contactNote" role="status" aria-live="polite"></p>
             </form>
           </div>
         </div>
@@ -580,44 +591,53 @@
 
     <script src="./script.js"></script>
 
-    <!-- ✅ Small inline helper: year + contact form opens email composer with filled details -->
+    <!-- ✅ Small inline helper: year + contact form submits without leaving page -->
     <script>
       (function () {
         // year
         var y = document.getElementById("year");
         if (y) y.textContent = new Date().getFullYear();
 
-        // Cloudflare-friendly mailto composer
+        // Contact form: AJAX submit (Netlify-compatible)
         var form = document.getElementById("contactForm");
+        var note = document.getElementById("contactNote");
         if (!form) return;
+
+        function encode(data) {
+          return Object.keys(data)
+            .map(function (key) {
+              return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+            })
+            .join("&");
+        }
 
         form.addEventListener("submit", function (e) {
           e.preventDefault();
+          if (note) note.textContent = "Sending...";
 
-          var name = (document.getElementById("name") || {}).value || "";
-          var company = (document.getElementById("company") || {}).value || "";
-          var email = (document.getElementById("email2") || {}).value || "";
-          var message = (document.getElementById("message") || {}).value || "";
+          var payload = {
+            "form-name": form.getAttribute("name") || "contact",
+            name: (document.getElementById("name") || {}).value || "",
+            company: (document.getElementById("company") || {}).value || "",
+            email: (document.getElementById("email2") || {}).value || "",
+            message: (document.getElementById("message") || {}).value || "",
+            "bot-field": (form.querySelector("[name='bot-field']") || {}).value || ""
+          };
 
-          // subject + body
-          var subject = "New message from " + (name || "Website visitor");
-          var body =
-            "Name: " + name + "\n" +
-            "Company: " + company + "\n" +
-            "Email: " + email + "\n\n" +
-            "Message:\n" + message + "\n";
-
-          var to = "innalzanegocio@innalzanegocio.com";
-          var mailto =
-            "mailto:" + encodeURIComponent(to) +
-            "?subject=" + encodeURIComponent(subject) +
-            "&body=" + encodeURIComponent(body);
-
-          // open mail app
-          window.location.href = mailto;
+          fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode(payload)
+          })
+            .then(function () {
+              if (note) note.textContent = "Message sent. We’ll reply within 24–48 hours.";
+              form.reset();
+            })
+            .catch(function () {
+              if (note) note.textContent = "Something went wrong. Please try again.";
+            });
         });
       })();
     </script>
   </body>
-</html> this entire thing is great, i love it, i only want you to correct one place do not try touching anywhere else, the send message part, enable for the visitor to be able to send without leaving page, also delete this This will open your email app and send to innalzanegocio@innalzanegocio.com. share the full updated html after that for me to just copy then paste to github 
-
+</html>
