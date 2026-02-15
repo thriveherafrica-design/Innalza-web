@@ -707,3 +707,41 @@ strong { font-weight: 800; }
   align-items: center !important;
   gap: 10px !important;
 }
+
+/* ===== MOBILE: make product images smaller + consistent ===== */
+
+/* Hit images inside the actual product grid no matter the card class */
+#productGrid img{
+  width: 100% !important;
+  height: 190px !important;      /* phone-friendly */
+  object-fit: cover !important;  /* clean crop */
+  object-position: center !important;
+  display: block !important;
+  border-radius: 16px !important;
+}
+
+/* If your image sits inside a “media” wrapper, force its height too */
+#productGrid .media,
+#productGrid .product-media,
+#productGrid .card-media,
+#productGrid .img-wrap,
+#productGrid .image-wrap{
+  height: 190px !important;
+  overflow: hidden !important;
+  border-radius: 16px !important;
+}
+
+/* Slightly shorter on very small phones */
+@media (max-width: 380px){
+  #productGrid img{
+    height: 165px !important;
+  }
+  #productGrid .media,
+  #productGrid .product-media,
+  #productGrid .card-media,
+  #productGrid .img-wrap,
+  #productGrid .image-wrap{
+    height: 165px !important;
+  }
+}
+
