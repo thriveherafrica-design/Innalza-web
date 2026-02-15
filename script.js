@@ -64,6 +64,6 @@ contactForm?.addEventListener("submit", (e) => {
     return;
   }
 
-  contactNote.textContent = "Message received. We’ll reply within 24–48 hours.";
+  contactNote.textContent = "Message received. We’ll reply within 24 hours.";
   contactForm.reset();
 });
