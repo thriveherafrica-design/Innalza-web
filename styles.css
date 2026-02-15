@@ -745,3 +745,13 @@ strong { font-weight: 800; }
   }
 }
 
+/* If product images are background-images on a div */
+#productGrid [style*="background-image"]{
+  height: 190px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+
